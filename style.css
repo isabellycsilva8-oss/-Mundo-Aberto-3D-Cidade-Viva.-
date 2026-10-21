@@ -1,0 +1,130 @@
+* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+
+body {
+  overflow: hidden;
+  background: #12141d;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #fff;
+}
+
+#webgl-container { position: fixed; inset: 0; }
+
+/* ---------- HUD ---------- */
+#hud {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 20px;
+}
+.hud-top { display: flex; justify-content: space-between; align-items: flex-start; }
+
+.hud-card {
+  background: rgba(12, 15, 24, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 12px 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  min-width: 220px;
+}
+.hud-card h2 {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+  color: #8a8b9b; margin-bottom: 4px;
+}
+.value { font-size: 20px; font-weight: 800; color: #00f0ff; }
+.hp { height: 6px; background: rgba(255, 255, 255, 0.12); border-radius: 4px; margin: 8px 0; overflow: hidden; }
+#hp-bar { height: 100%; width: 100%; background: linear-gradient(90deg, #ff2233, #ffb020); transition: width 0.3s; }
+.speed { color: #ff2233; font-weight: bold; font-size: 26px; min-height: 30px; }
+.sub { font-size: 13px; color: #b8bccb; margin-top: 4px; }
+
+#minimap {
+  width: 150px; height: 150px; border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  background: #0b1020;
+}
+
+.controls { font-size: 13px; color: #d1d5db; line-height: 2; }
+.controls span {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 6px; border-radius: 4px;
+  font-weight: bold; color: #fff;
+}
+
+/* ---------- Prompts ---------- */
+.prompt {
+  position: fixed; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.85);
+  padding: 12px 24px; border-radius: 8px;
+  font-weight: bold; font-size: 18px;
+  border: 2px solid #ff2233;
+  box-shadow: 0 0 15px rgba(255, 34, 51, 0.5);
+  display: none; pointer-events: none;
+}
+.prompt.gold { top: 30%; border-color: #ffd27a; box-shadow: 0 0 15px rgba(255, 210, 122, 0.5); }
+
+/* ---------- Garagem ---------- */
+.garage {
+  position: fixed; inset: 0; z-index: 5;
+  background: rgba(5, 7, 12, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+}
+.garage.hidden { display: none; }
+.garage-box {
+  background: #0f1320;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 24px;
+  width: min(760px, 92vw);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+.garage h1 {
+  font-size: 28px; margin-bottom: 16px;
+  background: linear-gradient(45deg, #ff2233, #7000ff);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.cars { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.car-btn {
+  background: #171c2c;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff; border-radius: 12px;
+  padding: 16px 12px; cursor: pointer; text-align: left;
+  transition: transform 0.2s, border-color 0.2s;
+  font-size: 14px;
+}
+.car-btn:hover { border-color: #00f0ff; transform: translateY(-2px); }
+.car-btn b { display: block; font-size: 16px; color: #00f0ff; margin-bottom: 6px; }
+.car-btn small { color: #8a8b9b; }
+#garage-close {
+  margin-top: 16px; padding: 10px 18px;
+  border-radius: 8px; border: none;
+  background: #ff2233; color: #fff; font-weight: bold; cursor: pointer;
+}
+
+/* ---------- Carregamento ---------- */
+.overlay {
+  position: fixed; inset: 0;
+  background: #090a0f;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  z-index: 10;
+  transition: opacity 0.5s ease;
+}
+.overlay.hidden { opacity: 0; pointer-events: none; }
+.overlay h1 {
+  font-size: 36px; margin: 15px 0 10px;
+  background: linear-gradient(45deg, #ff2233, #7000ff);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.overlay p { font-size: 15px; color: #8a8b9b; }
+.spinner {
+  width: 40px; height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-left-color: #ff2233;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

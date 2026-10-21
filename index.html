@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mundo Aberto 3D - Cidade Viva</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="webgl-container"></div>
+
+  <div id="interaction-prompt" class="prompt">Pressione [F] para entrar no carro</div>
+  <div id="garage-prompt" class="prompt gold">Pressione [G] para abrir a garagem</div>
+
+  <div id="hud">
+    <div class="hud-top">
+      <div class="hud-card">
+        <h2>Veículo atual</h2>
+        <div class="value" id="car-name"></div>
+        <div class="hp"><div id="hp-bar"></div></div>
+        <div id="speedometer" class="speed"></div>
+        <div class="sub" id="clock"></div>
+      </div>
+      <canvas id="minimap" width="150" height="150"></canvas>
+    </div>
+    <div class="hud-card controls">
+      <h2>Controles</h2>
+      <span>W/S</span> acelerar / frear / ré &nbsp;
+      <span>A/D</span> virar &nbsp;
+      <span>ESPAÇO</span> freio de mão (no carro) / pular (a pé) &nbsp;
+      <span>F</span> entrar / sair &nbsp;
+      <span>G</span> garagem &nbsp;
+      <span>1</span> spawn/trocar carro &nbsp;
+      <span>R</span> recuperar carro &nbsp;
+      <span>BOTÃO DIREITO</span> girar câmera
+    </div>
+  </div>
+
+  <div id="garage" class="garage hidden">
+    <div class="garage-box">
+      <h1>Garagem</h1>
+      <div id="garage-cars" class="cars"></div>
+      <button id="garage-close">Fechar (G)</button>
+    </div>
+  </div>
+
+  <div id="loading-screen" class="overlay">
+    <div class="spinner"></div>
+    <h1>Construindo Metrópole</h1>
+    <p id="loading-text">Ligando o motor V8...</p>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
